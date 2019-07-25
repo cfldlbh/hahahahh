@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry location="E:\apache\apache-maven-3.6.0\Maven\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar"/>
+
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+        <!--去除注释  -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://118.24.95.77:3306/mall?characterEncoding=utf8"
+                        userId="root"
+                        password="19961023Lbh@">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.lbh.cfld.model" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--  想要逆向生成的表在这里进行配置   -->
+        <table tableName="ums_admin_login_log">
+        </table>
+
+        <table tableName="ums_admin_permission_relation">
+        </table>
+        <table tableName="ums_admin_role_relation">
+        </table>
+        <table tableName="ums_growth_change_history">
+        </table>
+        <table tableName="ums_integration_change_history">
+        </table>
+        <table tableName="ums_integration_consume_setting">
+        </table>
+        <table tableName="ums_member">
+        </table>
+        <table tableName="ums_member_level">
+        </table>
+        <table tableName="ums_member_login_log">
+        </table>
+        <table tableName="ums_member_member_tag_relation">
+        </table>
+        <table tableName="ums_member_product_category_relation">
+        </table>
+        <table tableName="ums_member_receive_address">
+        </table>
+        <table tableName="ums_member_rule_setting">
+        </table>
+        <table tableName="ums_member_statistics_info">
+        </table>
+        <table tableName="ums_member_tag">
+        </table>
+        <table tableName="ums_member_task">
+        </table>
+        <table tableName="ums_permission">
+        </table>
+        <table tableName="ums_role">
+        </table>
+        <table tableName="ums_role_permission_relation">
+        </table>
+
+    </context>
+</generatorConfiguration>
