@@ -1,0 +1,18 @@
+<configuration>
+    <property name="LOG_HOME" value="/"/>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>/log/spiderLog.log</file>
+        <encoder>
+            <pattern>%cn -%.-1p %d{hh:MM:ss} [%8logger{26}] - %message%n</pattern>
+        </encoder>
+        <append>true</append>
+        <prudent>true</prudent>
+    </appender>
+
+
+
+
+    <root level="INFO">
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
