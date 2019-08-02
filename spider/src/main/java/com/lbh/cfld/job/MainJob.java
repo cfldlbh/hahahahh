@@ -6,7 +6,9 @@ import com.lbh.cfld.BeanContextUtils;
 import com.lbh.cfld.RootConfigure;
 import com.lbh.cfld.analysis.AnalysisUtils;
 import com.lbh.cfld.dao.NewsDataDao;
+import com.lbh.cfld.dao.NewsJobDao;
 import com.lbh.cfld.model.NewsData;
+import com.lbh.cfld.model.NewsJob;
 import com.lbh.cfld.service.NewsDataServiceImpl;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -21,40 +23,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainJob implements Job {
     private static final Logger log = LoggerFactory.getLogger(MainJob.class);
     @Autowired
+    private NewsJobDao newsJobDao;
+    @Autowired
     private com.lbh.cfld.service.NewsDataServiceImpl newsDataServiceImpl;
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        List<NewsJob> newsJobList = newsJobDao.getNewsJobList();
+        ExecutorService threadPool = Executors.newCachedThreadPool();
+        for(int c = 0;c<newsJobList.size();c++){
+            final NewsJob newsJob = newsJobList.get(c);
+            threadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String className = newsJob.getClassName();
+                        String analysisClass = newsJob.getAnalysisClass();
+                        //Class.forName() object.class  newsJob.getClass()
+                        Class<?> aClass = Class.forName(className);
+                        Method getUtl_list = aClass.getMethod("getUtl_List", String.class);
+                        List<String> urlList = (List<String>)getUtl_list.invoke(newsJob.getUrl());
+                        Class<?> analysisClazz = Class.forName(analysisClass);
+                        analysisClazz.getMethod("")
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
 
-    /*
-    冗余代码*************************
-     */
-//        log.info("开始任务");
-//        HttpGet httpGet = new HttpGet("http://temp.163.com/special/00804KV1/post1603_api_all.js?callback=callback");
-//        CloseableHttpResponse execute = null;
-//        try {
-//            execute = AnalysisUtils.client.execute(httpGet);
-//        } catch (IOException e) {
-//
-//        }
-//        HttpEntity entity = execute.getEntity();
-//        String s = null;
-//        try {
-//            s = EntityUtils.toString(entity);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        String substring = s.substring(s.indexOf("["), s.lastIndexOf("]") + 1);
-//        JSONArray objects = JSONObject.parseArray(substring);
-//        Iterator<Object> iterator = objects.iterator();
-//        while (iterator.hasNext()){
-//            JSONObject next = (JSONObject)iterator.next();
-//            String url =(String) next.get("url");
-//            NewsData simple = AnalysisUtils.simple(url);
-//            newsDataServiceImpl.insertOne(simple);
-//        }
-   }
+    }
 }
