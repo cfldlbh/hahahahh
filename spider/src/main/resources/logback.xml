@@ -42,7 +42,8 @@
     <root level="trace">
         <!--定义了两个appender，日志会通过往这两个appender里面写-->
         <appender-ref ref="stdout"/>
-<!--        <appender-ref ref="file"/>-->
+
+        <!--        <appender-ref ref="file"/>-->
     </root>
 
 

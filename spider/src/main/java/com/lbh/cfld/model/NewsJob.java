@@ -5,7 +5,34 @@ public class NewsJob {
     private String className;
     private Integer typeId;
     private String description;
+    private NewsType newsType;
+    private String url;
+    private String analysisClass;
 
+
+    public String getAnalysisClass() {
+        return analysisClass;
+    }
+
+    public void setAnalysisClass(String analysisClass) {
+        this.analysisClass = analysisClass;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public NewsType getNewsType() {
+        return newsType;
+    }
+
+    public void setNewsType(NewsType newsType) {
+        this.newsType = newsType;
+    }
     public Integer getId() {
         return id;
     }
