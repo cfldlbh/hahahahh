@@ -25,36 +25,9 @@ import java.util.Iterator;
 
 public class MainJob implements Job {
     private static final Logger log = LoggerFactory.getLogger(MainJob.class);
-    @Autowired
-    private com.lbh.cfld.service.NewsDataServiceImpl newsDataServiceImpl;
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-    /*
-    冗余代码*************************
-     */
-//        log.info("开始任务");
-//        HttpGet httpGet = new HttpGet("http://temp.163.com/special/00804KV1/post1603_api_all.js?callback=callback");
-//        CloseableHttpResponse execute = null;
-//        try {
-//            execute = AnalysisUtils.client.execute(httpGet);
-//        } catch (IOException e) {
-//
-//        }
-//        HttpEntity entity = execute.getEntity();
-//        String s = null;
-//        try {
-//            s = EntityUtils.toString(entity);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        String substring = s.substring(s.indexOf("["), s.lastIndexOf("]") + 1);
-//        JSONArray objects = JSONObject.parseArray(substring);
-//        Iterator<Object> iterator = objects.iterator();
-//        while (iterator.hasNext()){
-//            JSONObject next = (JSONObject)iterator.next();
-//            String url =(String) next.get("url");
-//            NewsData simple = AnalysisUtils.simple(url);
-//            newsDataServiceImpl.insertOne(simple);
-//        }
-   }
+    @Override
+    public void execute(JobExecutionContext context) throws JobExecutionException {
+
+    }
 }

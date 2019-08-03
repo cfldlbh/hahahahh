@@ -66,8 +66,9 @@ public class StartMain{
                 acfunNews.setTypeId(next.getTypeName());
                 acfunNews.setNewsId(next.getId());
                 serviceImpl.insertAcfunNews(acfunNews);
+                System.out.println(s);
             }
-            System.out.println(s);
+
         }
     }
 }
