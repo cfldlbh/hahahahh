@@ -4,6 +4,7 @@ package com.lbh.cfld.analysis;
 import com.alibaba.fastjson.JSONObject;
 import com.lbh.cfld.model.AcfunNewBean;
 import com.lbh.cfld.model.NewsData;
+import com.lbh.cfld.model.NewsType;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -75,6 +76,7 @@ public class AnalysisUtils {
 //        return tagStr;
 //    }
     public static HttpPost packagForm(NewsData bean) throws UnsupportedEncodingException {
+        NewsType newsType = bean.getNewsType();
         AcfunNewBean acfunNewBean = new AcfunNewBean();
         acfunNewBean.setTitle(bean.getTitle());
         JSONObject jsonObject = new JSONObject();
@@ -82,7 +84,7 @@ public class AnalysisUtils {
         JSONObject jsonObject1 = new JSONObject();
         jsonObject1.put("orderId","");
         jsonObject1.put("title","");
-        jsonObject1.put("txt",  bean.getContent());
+        jsonObject1.put("txt", "<p><h4>来源:</h4>"+bean.getUrl()+"</p>"+ bean.getContent());
         jsonObject1.put("desc","");
         objects.add(jsonObject1);
         jsonObject.put("bodyList",objects);
@@ -97,7 +99,7 @@ public class AnalysisUtils {
         cookieStore.addCookie(basicClientCookie);
         HttpPost httpPost = new HttpPost("https://www.acfun.cn/contribute/article");
         LinkedList<NameValuePair> objects1 = new LinkedList();
-        objects1.add(new BasicNameValuePair("title",acfunNewBean.getTitle()));
+        objects1.add(new BasicNameValuePair("title","转载来自【"+newsType.getSite()+"】"+acfunNewBean.getTitle()));
         objects1.add(new BasicNameValuePair("detail",acfunNewBean.getDetail()));
         objects1.add(new BasicNameValuePair("creationType",acfunNewBean.getCreationType()));
         objects1.add(new BasicNameValuePair("channelId",acfunNewBean.getChannelId()));
@@ -106,13 +108,17 @@ public class AnalysisUtils {
         httpPost.setEntity(new UrlEncodedFormEntity(objects1,"UTF-8"));
         return httpPost;
     }
-    public static String getHttp(String url){
+    public static String getHttp(String url,String... encode){
+        String en = "UTF-8";
+        if(encode.length>0){
+            en = encode[0];
+        }
         HttpGet httpGet = new HttpGet(url);
         try {
             CloseableHttpResponse execute = client.execute(httpGet);
             log.info("时间【{}】访问【"+url+"】成功,返回状态码{}",new SimpleDateFormat("yyyy-MM-dd :ss").format(new Date()),execute.getStatusLine().getStatusCode());
             HttpEntity entity = execute.getEntity();
-            return EntityUtils.toString(entity);
+            return EntityUtils.toString(entity,en);
         } catch (IOException e) {
             log.error("异常:{}",e.getMessage());
             e.printStackTrace();

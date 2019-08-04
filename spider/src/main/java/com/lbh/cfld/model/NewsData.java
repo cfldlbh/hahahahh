@@ -9,6 +9,15 @@ public class NewsData {
     private String content;
     private Integer typeName;
     private Timestamp time;
+    private NewsType newsType;
+
+    public NewsType getNewsType() {
+        return newsType;
+    }
+
+    public void setNewsType(NewsType newsType) {
+        this.newsType = newsType;
+    }
 
     public Integer getId() {
         return id;

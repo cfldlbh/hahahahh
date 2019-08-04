@@ -9,6 +9,7 @@ import com.lbh.cfld.dao.NewsDataDao;
 import com.lbh.cfld.dao.NewsJobDao;
 import com.lbh.cfld.model.NewsData;
 import com.lbh.cfld.model.NewsJob;
+import com.lbh.cfld.model.NewsType;
 import com.lbh.cfld.service.NewsDataServiceImpl;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -25,6 +26,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -47,12 +49,26 @@ public class MainJob implements Job {
                     try {
                         String className = newsJob.getClassName();
                         String analysisClass = newsJob.getAnalysisClass();
+                        NewsType newsType = newsJob.getNewsType();
+                        String xpathformat = newsType.getFormat();
                         //Class.forName() object.class  newsJob.getClass()
                         Class<?> aClass = Class.forName(className);
                         Method getUtl_list = aClass.getMethod("getUtl_List", String.class);
                         List<String> urlList = (List<String>)getUtl_list.invoke(newsJob.getUrl());
                         Class<?> analysisClazz = Class.forName(analysisClass);
-                        analysisClazz.getMethod("");
+                        Method startAnalysis = analysisClazz.getMethod("startAnalysis");
+                        Iterator<String> iterator = urlList.iterator();
+                        while(iterator.hasNext()){
+                            NewsData newsData = (NewsData)startAnalysis.invoke(iterator.next(), xpathformat);
+                            newsData.setTypeName(newsType.getId());
+                            try{
+                                newsDataServiceImpl.insertOne(newsData);
+                            }catch (Exception e){
+                                if(e instanceof SQLException){
+                                    log.error("数据库插入异常{}=={}",newsData.getUrl(),newsData.getContent());
+                                }
+                            }
+                        }
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     } catch (NoSuchMethodException e) {

@@ -45,7 +45,11 @@ public abstract class  AbstractAnalysis implements AnalysisInterface {
             strTitle = getTitle(jxDocument, title);
         }
         NewsData newsData = new NewsData();
-        newsData.setTitle(strTitle);
+        if(strContent.toString().contains("embed")){
+            newsData.setTitle("");
+        }else{
+            newsData.setTitle(strTitle);
+        }
         newsData.setContent(strContent.toString());
         newsData.setUrl(url);
         newsData.setTime(new Timestamp(new Date().getTime()));

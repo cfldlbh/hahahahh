@@ -32,7 +32,15 @@ public class NewsDataServiceImpl {
     private AcfunNewsDao acfunNewsDao;
 
     public Integer insertOne(NewsData data){
-        return newsDataDao.insertOne(data);
+        int i =0;
+        try{
+            i = newsDataDao.insertOne(data);
+        }catch (Exception e) {
+        if (e instanceof SQLException) {
+            System.out.println("插入数据库异常"+data.getUrl());
+        }
+        }
+        return i;
     }
 
     public void start(List<String> list){
