@@ -23,6 +23,8 @@ import org.junit.jupiter.api.Test;
 import org.quartz.*;
 import org.quartz.impl.StdScheduler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
@@ -40,6 +42,11 @@ import java.util.concurrent.Executors;
 
 public class StartMain{
 
+    private static Logger log = LoggerFactory.getLogger(StartMain.class);
+    @Test
+    public void testLog(){
+        log.info("日志测试");
+    }
     public static void main(String[] arg) throws IOException, SchedulerException {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfigure.class);
         StdScheduler scheduler = (StdScheduler)applicationContext.getBean("schedulerFactoryBean");

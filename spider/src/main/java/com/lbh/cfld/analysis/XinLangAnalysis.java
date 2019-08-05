@@ -22,29 +22,5 @@ import java.util.List;
  * @since JDK 1.8
  */
 public class XinLangAnalysis extends  AbstractAnalysis {
-    private static final Logger log = LoggerFactory.getLogger(XinLangAnalysis.class);
-    @Override
-    public NewsData startAnalysis(String url, JSONObject xpathFormat){
-        String strTitle;
-        StringBuilder strContent;
-        String content = xpathFormat.getString("content");
-        String title = xpathFormat.getString("title");
-        JSONArray excludeStr = xpathFormat.getJSONArray("excludeStr");
-        String http = AnalysisUtils.getHttp(url);
-        JXDocument jxDocument = JXDocument.create(http);
-        if(jxDocument==null){
-            strContent = new StringBuilder("");
-            strTitle = "";
-            log.error("空指针{}",url);
-        }else{
-            strContent = getContent(jxDocument, content, excludeStr);
-            strTitle = getTitle(jxDocument, title);
-        }
-        NewsData newsData = new NewsData();
-        newsData.setTitle(strTitle);
-        newsData.setContent(strContent.toString());
-        newsData.setUrl(url);
-        newsData.setTime(new Timestamp(new Date().getTime()));
-        return newsData;
-    }
+
 }
