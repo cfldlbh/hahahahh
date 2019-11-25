@@ -63,6 +63,7 @@ public class RootConfig {
     @Bean(name="sqlSessionFactory")
     public SqlSessionFactoryBean sqlSessionFactoryBean(DruidDataSource dataSource){
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+//        sqlSessionFactoryBean.setMapperLocations();
         sqlSessionFactoryBean.setDataSource(dataSource);
         return sqlSessionFactoryBean;
     }

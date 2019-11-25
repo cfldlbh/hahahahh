@@ -45,7 +45,11 @@ public class StartMain{
     private static Logger log = LoggerFactory.getLogger(StartMain.class);
     @Test
     public void testLog(){
-        log.info("日志测试");
+        String abc = new String("abc");
+        String ab = new String("ab");
+        System.out.println(abc == ab);
+        ab = ab+"c";
+        System.out.println(abc == ab);
     }
     public static void main(String[] arg) throws IOException, SchedulerException {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(RootConfigure.class);
@@ -66,7 +70,6 @@ public class StartMain{
     public void testJob() throws InterruptedException {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(RootConfigure.class);
         NewsJobDao newsJobDao = (NewsJobDao)context.getBean(NewsJobDao.class);
-
         final NewsDataServiceImpl newsDataServiceImpl = (NewsDataServiceImpl)context.getBean("newsDataServiceImpl");
         List<NewsJob> newsJobList = newsJobDao.getNewsJobList();
         ExecutorService threadPool = Executors.newCachedThreadPool();
@@ -90,12 +93,9 @@ public class StartMain{
                         Method startAnalysis = analysisClazz.getMethod("startAnalysis",String.class,JSONObject.class);
                         Iterator<String> iterator = urlList.iterator();
                         while (iterator.hasNext()) {
-
                             NewsData newsData = (NewsData) startAnalysis.invoke(o1,iterator.next(), JSONObject.parseObject(xpathformat));
                             newsData.setTypeName(newsType.getId());
-
-                                newsDataServiceImpl.insertOne(newsData);
-
+                            newsDataServiceImpl.insertOne(newsData);
                         }
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
@@ -138,6 +138,23 @@ public class StartMain{
                 System.out.println(s);
             }
             Thread.sleep(10000);
+        }
+    }
+    @Test
+    public void sortMaoPao(){
+        int[] arr ={5,22,87,10,25,35,89,78,99,11,29,33,1,1587,477,65};
+        for(int i =0 ;i<arr.length-1;i++){
+            for(int j=0;j<arr.length-1-i;j++){
+                int tempInt;
+                if(arr[j]>arr[j+1]){
+                    tempInt = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = tempInt;
+                }
+            }
+        }
+        for (int a : arr){
+            System.out.print(a+",");
         }
     }
 }

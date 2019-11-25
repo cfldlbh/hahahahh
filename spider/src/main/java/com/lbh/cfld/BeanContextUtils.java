@@ -3,7 +3,6 @@ package com.lbh.cfld;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.stereotype.Component;
 
 
 public class BeanContextUtils implements BeanFactoryPostProcessor {

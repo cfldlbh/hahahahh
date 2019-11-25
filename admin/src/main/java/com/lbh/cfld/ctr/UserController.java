@@ -20,7 +20,7 @@ public class UserController {
     private UserService userService;
     @RequestMapping("/login")
     @ResponseBody
-    public ResponseEntity login(@RequestBody String user) throws IllegalAccessException, InstantiationException {
+    public ResponseEntity login(@RequestBody() String user) throws IllegalAccessException, InstantiationException {
         JSONObject parse = JSONObject.parseObject(user);
         return userService.login(parse.getString("username"),parse.getString("password"));
     }
