@@ -9,4 +9,5 @@ package com.lbh.cfld.analysis;
  * @since JDK 1.8
  */
 public class SouHu_lifeAnalysis extends  AbstractAnalysis{
+
 }

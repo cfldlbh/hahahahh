@@ -1,5 +1,6 @@
 package com.lbh.cfld;
 
+import org.junit.Test;
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -7,6 +8,7 @@ import org.springframework.scheduling.quartz.AdaptableJobFactory;
 import org.springframework.stereotype.Component;
 
 @Component
+
 public class JobFactory extends AdaptableJobFactory {
     /**
      * AutowireCapableBeanFactory接口是BeanFactory的子类
@@ -28,5 +30,14 @@ public class JobFactory extends AdaptableJobFactory {
         factory.autowireBean(job);
         //返回对象
         return job;
+    }
+    @Test
+    public void test01(){
+        Integer i = 5;
+        zeroVal(i);
+        System.out.println(i);
+    }
+    public void zeroVal(Integer i){
+        i = 0;
     }
 }

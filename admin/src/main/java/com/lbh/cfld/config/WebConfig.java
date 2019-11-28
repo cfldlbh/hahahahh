@@ -1,7 +1,7 @@
 package com.lbh.cfld.config;
 
 
-import com.alibaba.fastjson.support.config.FastJsonConfig;
+
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

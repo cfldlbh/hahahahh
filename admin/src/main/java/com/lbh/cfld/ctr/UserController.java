@@ -1,7 +1,6 @@
 package com.lbh.cfld.ctr;
 
 import com.alibaba.fastjson.JSONObject;
-import com.lbh.cfld.model.UserAdmin;
 import com.lbh.cfld.service.UserService;
 import com.lbh.cfld.utils.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;

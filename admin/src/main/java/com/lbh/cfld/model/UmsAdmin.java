@@ -1,26 +1,33 @@
 package com.lbh.cfld.model;
 
-import com.lbh.cfld.baseModel.BaseModel;
+import java.util.Date;
 
-import java.sql.Date;
+public class UmsAdmin {
+    private Long id;
 
-public class UserAdmin implements BaseModel {
-    private Integer id;
     private String username;
+
     private String password;
+
     private String icon;
+
     private String email;
+
     private String nickName;
+
     private String note;
+
     private Date createTime;
+
     private Date loginTime;
+
     private Integer status;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -29,7 +36,7 @@ public class UserAdmin implements BaseModel {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
@@ -37,7 +44,7 @@ public class UserAdmin implements BaseModel {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password == null ? null : password.trim();
     }
 
     public String getIcon() {
@@ -45,7 +52,7 @@ public class UserAdmin implements BaseModel {
     }
 
     public void setIcon(String icon) {
-        this.icon = icon;
+        this.icon = icon == null ? null : icon.trim();
     }
 
     public String getEmail() {
@@ -53,7 +60,7 @@ public class UserAdmin implements BaseModel {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email == null ? null : email.trim();
     }
 
     public String getNickName() {
@@ -61,7 +68,7 @@ public class UserAdmin implements BaseModel {
     }
 
     public void setNickName(String nickName) {
-        this.nickName = nickName;
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     public String getNote() {
@@ -69,7 +76,7 @@ public class UserAdmin implements BaseModel {
     }
 
     public void setNote(String note) {
-        this.note = note;
+        this.note = note == null ? null : note.trim();
     }
 
     public Date getCreateTime() {

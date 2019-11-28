@@ -5,7 +5,7 @@
         "mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="E:\apache\apache-maven-3.6.0\Maven\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar"/>
+    <classPathEntry location="F:\maven_jar\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar"/>
 
     <context id="MysqlTables" targetRuntime="MyBatis3">
         <!--去除注释  -->
@@ -14,9 +14,9 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://118.24.95.77:3306/mall?characterEncoding=utf8"
+                        connectionURL="jdbc:mysql://120.79.151.208:3306/mall?characterEncoding=utf8"
                         userId="root"
-                        password="19961023Lbh@">
+                        password="123.">
         </jdbcConnection>
 
         <javaTypeResolver>
@@ -27,47 +27,19 @@
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lbh.cfld.dao" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
 
         <!--  想要逆向生成的表在这里进行配置   -->
-        <table tableName="ums_admin_login_log">
+        <table tableName="ums_admin%"  enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+        >
         </table>
-
-        <table tableName="ums_admin_permission_relation">
-        </table>
-        <table tableName="ums_admin_role_relation">
-        </table>
-        <table tableName="ums_growth_change_history">
-        </table>
-        <table tableName="ums_integration_change_history">
-        </table>
-        <table tableName="ums_integration_consume_setting">
-        </table>
-        <table tableName="ums_member">
-        </table>
-        <table tableName="ums_member_level">
-        </table>
-        <table tableName="ums_member_login_log">
-        </table>
-        <table tableName="ums_member_member_tag_relation">
-        </table>
-        <table tableName="ums_member_product_category_relation">
-        </table>
-        <table tableName="ums_member_receive_address">
-        </table>
-        <table tableName="ums_member_rule_setting">
-        </table>
-        <table tableName="ums_member_statistics_info">
-        </table>
-        <table tableName="ums_member_tag">
-        </table>
-        <table tableName="ums_member_task">
-        </table>
-        <table tableName="ums_permission">
-        </table>
-        <table tableName="ums_role">
-        </table>
-        <table tableName="ums_role_permission_relation">
-        </table>
-
     </context>
 </generatorConfiguration>
